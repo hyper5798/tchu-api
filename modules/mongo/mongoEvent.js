@@ -125,7 +125,8 @@ function getAverage() {
                 nh: { $avg: "$information.nh" },
                 ec: { $avg: "$information.ec" },
                 ph: { $avg: "$information.ph" },
-            }).exec(function(err, result) {
+            }, { cursor:{}}
+            ).exec(function(err, result) {
                 if(err){
                     console.log(err);
                     reject(err)
