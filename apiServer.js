@@ -95,7 +95,11 @@ var server = app.listen(config.port, function () {
 //const server = http.createServer(app);
 
 var io = require('socket.io')(server, {
-	allowEIO3:true
+	allowEIO3:true,
+	cors: {
+	  origin: "*",
+	  methods: ["GET", "POST"]
+	}
   })
 
 io.sockets.on('connection', function (socket) {
