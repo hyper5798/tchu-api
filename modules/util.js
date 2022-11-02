@@ -320,6 +320,10 @@ function getIntData(key, arrRange,initData){
     var end = arrRange[1];
     var diff = arrRange[2];
     var str = initData.substring(start,end);
+    if(diff === 'nh') {
+        str = changePlace(str);
+        return hexToSingle(str)
+    }
     var data;
     if(key == 'Psum' || key == 'Qsum' || key == 'Ssum' || key == 'Pf') {
         data = parse(str);
@@ -327,12 +331,31 @@ function getIntData(key, arrRange,initData){
         data = parseInt(str,16);
     }
 
+    
+    
     // example : 
     // diff = "data/100"
     // data = 2000
     // eval(diff) = 2000/100 = 20
     
     return eval(diff);
+}
+
+function changePlace(str) {
+    var cd = str.substring(0,4);
+    var ab = str.substring(4,8);
+    return ab+cd;    
+}
+
+function hexToSingle(num) {
+    var a = num;
+    var b = parseInt(a,16);
+    var s = (b&0x80000000) ? -1 : 1;
+    var e = (b&0x7f800000)/0x800000-127;
+    var c = (b&0x7fffff)/0x800000;
+    var re = s*(1+c)*Math.pow(2,e);
+    console.log('hexToSingle('+num+') = ' + re)
+    return parseFloat(re.toFixed(1));
 }
 
 function parse(hex) {
