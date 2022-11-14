@@ -355,7 +355,8 @@ function hexToSingle(num) {
     var c = (b&0x7fffff)/0x800000;
     var re = s*(1+c)*Math.pow(2,e);
     console.log('hexToSingle('+num+') = ' + re)
-    return parseFloat(re.toFixed(1));
+    //return parseFloat(re.toFixed(1));
+    return Math.round((re + Number.EPSILON) * 100) / 100;
 }
 
 function parse(hex) {
