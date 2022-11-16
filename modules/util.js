@@ -337,8 +337,11 @@ function getIntData(key, arrRange,initData){
     // diff = "data/100"
     // data = 2000
     // eval(diff) = 2000/100 = 20
+    //return eval(diff);
+    var value = eval(diff);
+    value = Math.round((value + Number.EPSILON) * 100) / 100;
     
-    return eval(diff);
+    return value;
 }
 
 function changePlace(str) {
