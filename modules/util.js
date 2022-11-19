@@ -193,6 +193,13 @@ function parseMsgd(message, callback) {
         var mDate = tMoment.format('YYYY-MM-DD HH:mm:ss');
         
         var mRecv = obj.time;
+        /*if(mRecv.indexOf('Z')>0) {
+            mRecv = mRecv.replace('.000Z','')
+        }
+        if(mRecv.indexOf('+08')>0) {
+            mRecv = mRecv.replace('+08:00','')
+        }*/
+        mRecv = new Date(mRecv).toISOString();
     
         // console.log('mRecv : '+  mRecv);
         // console.log('mDate : '+ mDate);
